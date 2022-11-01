@@ -1,7 +1,7 @@
 import pyshark
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib.colors as mcolors
+import sys
 
 def tcp_header_flags():
     
@@ -41,6 +41,7 @@ def tcp_header_flags():
     keys = dict.keys()
     values = dict.values()
     print("Loading.....")
+    plot2 = plt.figure(0)
     plt.title("TCP HEADER FLAGS") 
     plt.ylabel('No. of packets')
     plt.xlabel('Header flags')
@@ -49,6 +50,29 @@ def tcp_header_flags():
     plt.savefig('header_flags.jpg')
     print("Saved as header_flags.jpg")
 
+def transport_protocols():
+    dict = {}
+    colors = ['#db4c40', '#783F8E', '#343F3E']
+    cap = pyshark.FileCapture(r'C:/Users/anush/temp/ult.pcapng')
+    for pkt in cap:
+        protocol = pkt.transport_layer
+        if protocol == 'TCP':
+            dict['TCP'] = dict.get('TCP', 0) + 1
+        elif protocol == 'UDP':
+            dict['UDP'] = dict.get('UDP', 0) + 1
+    
+    keys = dict.keys()
+    values = dict.values()
+    print("Loading.....")
+    plot1 = plt.figure(1)
+    plt.title("TRANSPORT PROTOCOLS") 
+    plt.ylabel('No. of packets')
+    plt.xlabel('Transport Protocols')
+    plt.bar(keys, values, color=colors, width=0.2, align='center')
+    plt.savefig('protocols.jpg')
+    print("Saved as protocols.jpg")
+
 if __name__ == "__main__":
+    sys.tracebacklimit = 0
     tcp_header_flags()
-    #transport_protocols()
+    transport_protocols()
