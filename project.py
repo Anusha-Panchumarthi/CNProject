@@ -1,6 +1,5 @@
 import pyshark
 import matplotlib.pyplot as plt
-import numpy as np
 import sys
 import nest_asyncio
 
@@ -54,7 +53,7 @@ def tcp_header_flags():
 def transport_protocols():
     dict = {}
     colors = ['#db4c40', '#783F8E', '#343F3E']
-    cap = pyshark.FileCapture(r'C:/Users/anush/temp/tester.pcapng')
+    cap = pyshark.FileCapture(r'C:/Users/anush/temp/ult.pcapng')
     for pkt in cap:
         protocol = pkt.transport_layer
         if protocol == 'TCP':
