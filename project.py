@@ -7,7 +7,7 @@ def tcp_header_flags():
     
     dict = {}
     colors = ['#320e3b', '#e56399', '#7f96ff', '#a6cfd5', '#49a078', '#7D80DA', '#993955', '#db4c40', '#783F8E', '#343F3E']
-    cap = pyshark.FileCapture(r'C:/Users/anush/temp/tester.pcapng')
+    cap = pyshark.FileCapture(r'C:/Users/anush/temp/ult.pcapng')
     for pkt in cap:
         #x = pkt.tcp
         if pkt.transport_layer != 'TCP':
